@@ -255,22 +255,6 @@ const S: Record<string, React.CSSProperties> = {
 
 // ─── COMPONENTS ───
 
-function MarqueeBar() {
-  return (
-    <div style={{
-      background: "#ffff00", color: "#CC0000", fontWeight: "bold",
-      fontSize: 12, padding: "2px 0", overflow: "hidden", whiteSpace: "nowrap",
-      borderBottom: "1px solid #808080",
-    }}>
-      <div style={{
-        display: "inline-block",
-        animation: "marquee 20s linear infinite",
-      }}>
-        ★★★ WELCOME TO THE RED DAWN PROJECT ★★★ Your #1 source for information on the New World Order ★★★ NOW WITH {ALL_ARTICLES.length} ARTICLES! ★★★ Last updated: March 2001 ★★★ Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.0 at 800x600 ★★★
-      </div>
-    </div>
-  );
-}
 
 function TopBanner({ onNavigate }: { onNavigate: (key: string) => void }) {
   return (
@@ -540,22 +524,6 @@ function TimelineTable({ events }: { events: { year: string; event: string }[] }
   );
 }
 
-function HitCounter() {
-  const [count] = useState(() => Math.floor(Math.random() * 50000) + 12000);
-  const digits = String(count).padStart(6, "0").split("");
-  return (
-    <div style={{ display: "flex", justifyContent: "center", gap: 1, margin: "4px 0" }}>
-      {digits.map((d, i) => (
-        <span key={i} style={{
-          background: "#000000", color: "#00ff00",
-          fontFamily: "monospace", fontSize: 14, fontWeight: "bold",
-          padding: "2px 4px", border: "1px inset #333",
-          minWidth: 14, textAlign: "center", display: "inline-block",
-        }}>{d}</span>
-      ))}
-    </div>
-  );
-}
 
 function ArticlePage({ data, onNavigate }: { data: any; onNavigate: (key: string) => void }) {
   const renderContent = (html: string) => {
@@ -786,7 +754,6 @@ function SearchResults({ query, onNavigate }: { query: string; onNavigate: (key:
 export default function RedDawnWiki() {
   const [page, setPage] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
-  const _mainRef = useRef(null);
 
   const navigate = (key: string) => {
     setPage(key);
