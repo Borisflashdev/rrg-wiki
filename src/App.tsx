@@ -1,9 +1,22 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import indiaFlag from "./assets/flags/india.png";
 import logo from "./assets/logo.png";
 
 // ─── DATA ───
-const WIKI_DATA: Record<string, any> = {
+interface WikiEntry {
+  type: string;
+  title?: string;
+  subtitle?: string;
+  category?: string;
+  lastUpdated?: string;
+  infobox?: Record<string, string>;
+  content?: string;
+  related?: string[];
+  timeline?: { year: string; event: string }[];
+  featured?: string[];
+}
+
+const WIKI_DATA: Record<string, WikiEntry> = {
   home: {
     type: "home",
     title: "The Red Dawn Project",
@@ -525,7 +538,7 @@ function TimelineTable({ events }: { events: { year: string; event: string }[] }
 }
 
 
-function ArticlePage({ data, onNavigate }: { data: any; onNavigate: (key: string) => void }) {
+function ArticlePage({ data, onNavigate }: { data: WikiEntry; onNavigate: (key: string) => void }) {
   const renderContent = (html: string) => {
     const parts = html.split(/(<\/?[^>]+>)/g);
     const elements: React.ReactNode[] = [];
@@ -562,7 +575,7 @@ function ArticlePage({ data, onNavigate }: { data: any; onNavigate: (key: string
       } else if (part === "</a>") {
         const linkText = buffer;
         buffer = "";
-        const matchKey = ALL_ARTICLES.find(([, v]) => v.title.toLowerCase().includes(linkText.toLowerCase()))?.[0];
+        const matchKey = ALL_ARTICLES.find(([, v]) => v.title?.toLowerCase().includes(linkText.toLowerCase()))?.[0];
         elements.push(
           <span key={`a-${i}`} onClick={() => matchKey && onNavigate(matchKey)} style={S.link}>
             {linkText}
@@ -600,9 +613,9 @@ function ArticlePage({ data, onNavigate }: { data: any; onNavigate: (key: string
         From The Red Dawn Project, the free encyclopedia. Last modified: {data.lastUpdated}
       </div>
 
-      {data.infobox && <Infobox data={data.infobox} title={data.title} />}
+      {data.infobox && <Infobox data={data.infobox} title={data.title ?? ""} />}
       <div style={{ lineHeight: 1.7, textAlign: "justify" }}>
-        {renderContent(data.content)}
+        {renderContent(data.content ?? "")}
       </div>
       <div style={{ clear: "both" }} />
 
@@ -663,7 +676,7 @@ function HomePage({ onNavigate }: { onNavigate: (key: string) => void }) {
             <tr key={row}>
               {[0, 1].map(col => {
                 const idx = row * 2 + col;
-                const key = WIKI_DATA.home.featured[idx];
+                const key = (WIKI_DATA.home.featured ?? [])[idx];
                 const article = WIKI_DATA[key];
                 if (!article) return <td key={col} />;
                 return (
@@ -676,7 +689,7 @@ function HomePage({ onNavigate }: { onNavigate: (key: string) => void }) {
                     }}>{article.title}</div>
                     <div style={{ padding: "6px 8px", background: "#f0f0e8" }}>
                       <p style={{ fontSize: 12, lineHeight: 1.5, marginBottom: 4 }}>
-                        {article.content.slice(0, 180).replace(/<[^>]*>/g, "").replace(/\*\*/g, "")}...
+                        {(article.content ?? "").slice(0, 180).replace(/<[^>]*>/g, "").replace(/\*\*/g, "")}...
                       </p>
                       <span onClick={() => onNavigate(key)} style={{ ...S.link, fontSize: 11 }}>
                         » Read full article
@@ -708,7 +721,7 @@ function HomePage({ onNavigate }: { onNavigate: (key: string) => void }) {
 function SearchResults({ query, onNavigate }: { query: string; onNavigate: (key: string) => void }) {
   const q = query.toLowerCase();
   const results = ALL_ARTICLES.filter(([, v]) =>
-    v.title.toLowerCase().includes(q) || v.content.toLowerCase().includes(q)
+    v.title?.toLowerCase().includes(q) || v.content?.toLowerCase().includes(q)
   );
 
   return (
