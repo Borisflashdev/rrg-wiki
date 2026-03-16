@@ -46,7 +46,12 @@ const TOOLS_ITEMS = [
   { label: "GitHub (Wiki)", key: null },
 ];
 
-export default function Sidebar({ onNavigate, currentPage }: { onNavigate: (key: string) => void; currentPage: string }) {
+import { useNavigate, useLocation } from "react-router-dom";
+
+export default function Sidebar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
   return (
     <td className="rdp-sidebar w-[180px] align-top p-0">
       <div className="win95-inset p-0">
@@ -71,14 +76,14 @@ export default function Sidebar({ onNavigate, currentPage }: { onNavigate: (key:
               {section.items.map(item => (
                 <div key={item.label} className="pl-3 mb-[1px]">
                   <span
-                    onClick={() => item.key && onNavigate(item.key)}
+                    onClick={() => item.key && navigate(`/${item.key}`)}
                     className={[
                       "text-[12px]",
-                      item.key && currentPage === item.key ? "text-[#800000] underline cursor-pointer font-bold" : "text-[#CC0000] underline",
+                      item.key && currentPath === `/${item.key}` ? "text-[#800000] underline cursor-pointer font-bold" : "text-[#CC0000] underline",
                       item.key ? "cursor-pointer opacity-100" : "cursor-default opacity-50",
                     ].join(" ")}
                   >
-                    {item.key && currentPage === item.key ? "» " : ""}{item.label}
+                    {item.key && currentPath === `/${item.key}` ? "» " : ""}{item.label}
                   </span>
                 </div>
               ))}
