@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const NAV_SECTIONS = [
@@ -52,12 +52,18 @@ const NAV_SECTIONS = [
   },
 ];
 
-const HEADER_LINKS = ["Main page", "Random page", "Change logs", "Help", "Contact", "Support us"];
+const HEADER_LINKS = [
+  { label: "Main page", key: "/" },
+  { label: "Random page", key: null },
+  { label: "Change logs", key: null },
+  { label: "Help", key: null },
+  { label: "Contact", key: null },
+  { label: "Support us", key: null },
+];
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleNavigate = (key: string) => {
     navigate(key === "/" ? "/" : `/${key}`);
@@ -100,10 +106,16 @@ export default function MobileMenu() {
 
         {/* Header links */}
         <div className="px-6 mb-3">
-          {HEADER_LINKS.map(label => (
-            <a key={label} href="#" className="block py-[4px] text-[14px] text-primary hover:underline font-mono">
-              {label}
-            </a>
+          {HEADER_LINKS.map(({ label, key }) => (
+            key ? (
+              <span key={label} onClick={() => handleNavigate(key)} className="block py-[4px] text-[14px] text-primary hover:underline font-mono cursor-pointer">
+                {label}
+              </span>
+            ) : (
+              <a key={label} href="#" className="block py-[4px] text-[14px] text-primary hover:underline font-mono">
+                {label}
+              </a>
+            )
           ))}
         </div>
 
@@ -118,27 +130,22 @@ export default function MobileMenu() {
                 <div className="mt-1 h-[1px] bg-gradient-to-r from-transparent via-[#c8ccd1] to-transparent" />
               </div>
               <ul className="list-none p-0">
-                {section.items.map(item => {
-                  const isActive = item.key && (
-                    item.key === "/" ? location.pathname === "/" : location.pathname === `/${item.key}`
-                  );
-                  return (
-                    <li key={item.label} className="py-[2px]">
-                      {item.key ? (
-                        <span
-                          onClick={() => handleNavigate(item.key!)}
-                          className={`text-[14px] cursor-pointer hover:underline ${isActive ? "text-[#202122] font-bold" : "text-primary"}`}
-                        >
-                          {item.label}
-                        </span>
-                      ) : (
-                        <span className="text-primary text-[14px] opacity-50 cursor-default">
-                          {item.label}
-                        </span>
-                      )}
-                    </li>
-                  );
-                })}
+                {section.items.map(item => (
+                  <li key={item.label} className="py-[2px]">
+                    {item.key ? (
+                      <span
+                        onClick={() => handleNavigate(item.key!)}
+                        className="text-[14px] cursor-pointer hover:underline text-primary"
+                      >
+                        {item.label}
+                      </span>
+                    ) : (
+                      <span className="text-primary text-[14px] opacity-50 cursor-default">
+                        {item.label}
+                      </span>
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           ))}

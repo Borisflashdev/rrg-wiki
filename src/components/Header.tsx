@@ -33,7 +33,7 @@ export default function Header() {
               key={label}
               href={href}
               onClick={href === "/" ? (e) => { e.preventDefault(); navigate("/"); } : undefined}
-              className={`${show} px-3 py-[6px] text-[14px] text-primary hover:underline font-sans`}
+              className={`${show} px-3 py-[6px] text-[14px] text-primary hover:underline `}
             >
               {label}
             </a>
@@ -47,7 +47,7 @@ export default function Header() {
             onChange={e => setQ(e.target.value)}
             onKeyDown={e => { if (e.key === "Enter") handleSearch(); }}
             placeholder="Search Rocket's Red Glare"
-            className="w-[260px] pl-8 pr-2 py-1 text-[14px] border border-[#c8ccd1] rounded-[2px] bg-white font-sans outline-none"
+            className="w-[260px] pl-8 pr-2 py-1 text-[14px] border border-[#c8ccd1] rounded-[2px] bg-white  outline-none"
           />
           <svg
             onClick={handleSearch}

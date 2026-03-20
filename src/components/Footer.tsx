@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-[#f8f9fa] border-t border-[#c8ccd1] px-6 py-3 text-[14px] text-[#54595d] text-center font-sans">
+    <footer className="bg-[#f8f9fa] border-t border-[#c8ccd1] px-6 py-3 text-[14px] text-[#54595d] text-center">
       <div className="flex flex-wrap justify-center gap-x-1 mb-2">
         {[
           "Patreon",

@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 const NAV_SECTIONS = [
@@ -53,10 +53,9 @@ const NAV_SECTIONS = [
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
-    <aside className="relative w-[220px] min-w-[220px] h-full bg-[#f8f9fa] pl-[50px] pr-[10px] py-[12px] font-sans text-[14px]">
+    <aside className="relative w-[220px] min-w-[220px] h-full bg-[#f8f9fa] pl-[50px] pr-[10px] py-[12px] text-[14px]">
       <div className="absolute top-0 right-0 w-[1px] h-full bg-[linear-gradient(to_bottom,transparent_0px,#c8ccd1_60px,#c8ccd1_calc(100%_-_58.25px),transparent_100%)]" />
       <div className="absolute top-0 right-0 w-[1px] h-full bg-[linear-gradient(to_bottom,transparent_0px,#c8ccd1_60px,#c8ccd1_calc(100%_-_58.25px),transparent_100%)]" />
       <div className="flex flex-col items-center mb-4 cursor-pointer " onClick={() => navigate("/")}>
@@ -76,27 +75,22 @@ export default function Sidebar() {
             </div>
           )}
           <ul className="list-none p-0">
-            {section.items.map(item => {
-              const isActive = item.key && (
-                item.key === "/" ? location.pathname === "/" : location.pathname === `/${item.key}`
-              );
-              return (
-                <li key={item.label} className="py-[2px]">
-                  {item.key ? (
-                    <span
-                      onClick={() => navigate(item.key === "/" ? "/" : `/${item.key}`)}
-                      className={`text-[14px] cursor-pointer hover:underline ${isActive ? "text-[#202122] font-bold" : "text-primary"}`}
-                    >
-                      {item.label}
-                    </span>
-                  ) : (
-                    <span className="text-primary text-[14px] opacity-50 cursor-default">
-                      {item.label}
-                    </span>
-                  )}
-                </li>
-              );
-            })}
+            {section.items.map(item => (
+              <li key={item.label} className="py-[2px]">
+                {item.key ? (
+                  <span
+                    onClick={() => navigate(item.key === "/" ? "/" : `/${item.key}`)}
+                    className="text-[14px] cursor-pointer hover:underline text-primary"
+                  >
+                    {item.label}
+                  </span>
+                ) : (
+                  <span className="text-primary text-[14px] opacity-50 cursor-default">
+                    {item.label}
+                  </span>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       ))}

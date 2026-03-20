@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Title from "../components/Title";
 import ImageBox from "../components/ImageBox";
 import logo from "../assets/logo_white_bg.png";
@@ -59,7 +60,7 @@ export default function HomePage() {
       </div>
       <div className="grid grid-cols-2 nav3:grid-cols-4 gap-3 mt-4">
         {[
-          { src: warsawPact, label: "Warsaw Pact", items: ["Soviet Union", "Germany", "Czechoslovakia", "Hungary", "Romania", "Bulgaria", "Yugoslavia", "Turkey", "Iran", "Iraq", "Syria", "Afghanistan", "Republic of Mahabad", "Austria", "Macedonia"] },
+          { src: warsawPact, label: "Warsaw Pact", items: [{ label: "Soviet Union", link: "/nations/ussr" }, "Germany", "Czechoslovakia", "Hungary", "Romania", "Bulgaria", "Yugoslavia", "Turkey", "Iran", "Iraq", "Syria", "Afghanistan", "Republic of Mahabad", "Austria", "Macedonia"] },
           { src: mediterraneanPact, label: "Mediterranean Pact", items: ["Italy", "People's Republic of Greece", "Egypt", "Algeria", "Somalia", "Croatia", "Albania", "Portugal", "Slovenia", "Free Territory of Trieste", "San Marino"] },
           { src: westernUnion, label: "Western Union", items: ["Netherlands", "Sweden", "Denmark", "Norway", "Spain", "Flanders", "Luxembourg", "Iceland"] },
           { src: commonwealth, label: "Commonwealth", items: ["United Kingdom", "Canada", "Australia", "New Zealand", "Malayan Union", "Republic of Newfoundland", "West Indies Federation", "Rhodesia", "Northern Rhodesia", "Territory of Venda", "Fiji", "New England", "Tuvalu", "Niue", "Cook Islands"] },
@@ -67,9 +68,18 @@ export default function HomePage() {
           <div key={label} className="flex flex-col items-center">
             <ImageBox src={src} caption={`<a href="#" class="text-primary hover:underline"><b>${label}</b></a>`} boxStyle={false} size={300} />
             <ul className="list-none text-[14px] mt-1 w-full text-center">
-              {items.map(item => (
-                <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
-              ))}
+              {items.map(item => {
+                const label = typeof item === "string" ? item : item.label;
+                const link = typeof item === "string" ? null : item.link;
+                return (
+                  <li key={label}>
+                    {link
+                      ? <Link to={link} className="text-primary hover:underline">{label}</Link>
+                      : <a href="#" className="text-primary hover:underline">{label}</a>
+                    }
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
@@ -89,11 +99,20 @@ export default function HomePage() {
           { label: "Asia", items: ["China", "India", "Vietnam", "Indonesia", "People's Republic of Japan", "State of Japan", "Korea", "Mongolia", "South Yemen", "Kashmir", "North Kalimantan", "Hokkaido", "Ryukyu", "Jewish State of Tasmania"] },
         ].map(({ label, items }) => (
           <div key={label} className="flex flex-col items-center">
-            <a href="#" className="text-primary hover:underline text-[16px]"><b>{label}</b></a>
+            <a href="#" className="text-primary hover:underline text-[14px]"><b>{label}</b></a>
             <ul className="list-none text-[14px] mt-1 w-full text-center">
-              {items.map(item => (
-                <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
-              ))}
+              {items.map(item => {
+                const label = typeof item === "string" ? item : item.label;
+                const link = typeof item === "string" ? null : item.link;
+                return (
+                  <li key={label}>
+                    {link
+                      ? <Link to={link} className="text-primary hover:underline">{label}</Link>
+                      : <a href="#" className="text-primary hover:underline">{label}</a>
+                    }
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
