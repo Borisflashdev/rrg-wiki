@@ -10,7 +10,7 @@ export default function RedDawnWiki() {
   return (
     <LightboxProvider>
       <div className="min-h-screen flex bg-[#f8f9fa] text-[14px] text-[#202122]">
-        <div className="hidden mobile:block">
+        <div className="hidden mobile:block self-stretch">
           <Sidebar />
         </div>
         <div className="flex flex-col flex-1 min-w-0">

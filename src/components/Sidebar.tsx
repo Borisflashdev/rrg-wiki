@@ -56,7 +56,7 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="relative w-[220px] min-w-[220px] bg-[#f8f9fa] pl-[50px] pr-[10px] py-[12px] font-sans text-[14px]">
+    <aside className="relative w-[220px] min-w-[220px] h-full bg-[#f8f9fa] pl-[50px] pr-[10px] py-[12px] font-sans text-[14px]">
       <div className="absolute top-0 right-0 w-[1px] h-full bg-[linear-gradient(to_bottom,transparent_0px,#c8ccd1_60px,#c8ccd1_calc(100%_-_58.25px),transparent_100%)]" />
       <div className="absolute top-0 right-0 w-[1px] h-full bg-[linear-gradient(to_bottom,transparent_0px,#c8ccd1_60px,#c8ccd1_calc(100%_-_58.25px),transparent_100%)]" />
       <div className="flex flex-col items-center mb-4 cursor-pointer " onClick={() => navigate("/")}>

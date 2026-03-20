@@ -2,6 +2,7 @@ import Title from "../components/Title";
 import { Link } from "react-router-dom";
 import ImageBox from "../components/ImageBox";
 import logo from "../assets/logo_white_bg.png";
+import map from "../assets/map_trans.png";
 import commonwealth from "../assets/pacts/commonwealth.png";
 import warsawPact from "../assets/pacts/warsaw_pact.jpg";
 import mediterraneanPact from "../assets/pacts/mediterranean_pact.png";
@@ -55,11 +56,6 @@ export default function HomePage() {
           fragile alliances. Below you will find a list of the major pacts and coalitions that define the geopolitical
           landscape, as well as a full list of playable nations and their place in this alternate world. If you are
           new to the mod and unsure where to begin, feel free to start there.
-          <br /><br />
-          Optionally, you can follow the{" "}
-          <a href="#" className="text-primary hover:underline">complete timeline</a>
-          {" "}— a chronological overview of the key events that shaped the world from 1944 to 2000,
-          from the final years of the Second World War to the state of the world at the mod's start date.<br/><br/>
         </p>
       </div>
       <div className="grid grid-cols-2 nav3:grid-cols-4 gap-3 mt-4">
@@ -70,7 +66,7 @@ export default function HomePage() {
           { src: commonwealth, label: "Commonwealth", items: ["United Kingdom", "Canada", "Australia", "New Zealand", "Malayan Union", "Republic of Newfoundland", "West Indies Federation", "Rhodesia", "Northern Rhodesia", "Territory of Venda", "Fiji", "New England", "Tuvalu", "Niue", "Cook Islands"] },
         ].map(({ src, label, items }) => (
           <div key={label} className="flex flex-col items-center">
-            <ImageBox src={src} caption={`<a href="#" class="text-primary hover:underline">${label}</a>`} boxStyle={false} size={300} />
+            <ImageBox src={src} caption={`<a href="#" class="text-primary hover:underline"><b>${label}</b></a>`} boxStyle={false} size={300} />
             <ul className="list-none text-[14px] mt-1 w-full text-center">
               {items.map(item => (
                 <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
@@ -81,7 +77,7 @@ export default function HomePage() {
       </div>
       <div className="grid grid-cols-2 nav3:grid-cols-4 gap-3 mt-3">
         <div className="flex flex-col items-center">
-          <ImageBox src={laFrancophonie} caption='<a href="#" class="text-primary hover:underline">La Francophonie</a>' boxStyle={false} size={300} />
+          <ImageBox src={laFrancophonie} caption='<a href="#" class="text-primary hover:underline"><b>La Francophonie</b></a>' boxStyle={false} size={300} />
           <ul className="list-none text-[14px] mt-1 w-full text-center">
             {["France", "Quebec", "Mali Federation", "Mauritania", "Upper Volta", "Guinea-Cayenne", "Wallonia", "Saarland", "Guadeloupe", "French Polynesia", "New Caledonia", "St Pierre and Miquelon", "Wallis and Futuna"].map(item => (
               <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
@@ -94,7 +90,7 @@ export default function HomePage() {
           { label: "Asia", items: ["China", "India", "Vietnam", "Indonesia", "People's Republic of Japan", "State of Japan", "Korea", "Mongolia", "South Yemen", "Kashmir", "North Kalimantan", "Hokkaido", "Ryukyu", "Jewish State of Tasmania"] },
         ].map(({ label, items }) => (
           <div key={label} className="flex flex-col items-center">
-            <a href="#" className="text-primary hover:underline text-[16px]">{label}</a>
+            <a href="#" className="text-primary hover:underline text-[16px]"><b>{label}</b></a>
             <ul className="list-none text-[14px] mt-1 w-full text-center">
               {items.map(item => (
                 <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
@@ -102,6 +98,18 @@ export default function HomePage() {
             </ul>
           </div>
         ))}
+      </div>
+      <Title title="Timeline" links={[]} size={18} />
+      <div className="mb-3">
+        <p className="text-[16px] text-black leading-[1.7]">
+          Optionally, you can follow the{" "}
+          <a href="#" className="text-primary hover:underline">complete timeline</a>
+          {" "}— a chronological overview of the key events that shaped the world from 1944 to 2000,
+          from the final years of the Second World War to the state of the world at the mod's start date.
+        </p>
+      </div>
+      <div className="flex justify-center">
+        <ImageBox src={map} caption="The official Rocket's Red Glare world map, as of 2026." boxStyle={true} size={1200} />
       </div>
     </div>
   );
