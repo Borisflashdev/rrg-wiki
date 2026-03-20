@@ -1,7 +1,12 @@
 import Title from "../components/Title";
+import { Link } from "react-router-dom";
 import ImageBox from "../components/ImageBox";
 import logo from "../assets/logo_white_bg.png";
-import logoClear from "../assets/logo.png";
+import commonwealth from "../assets/pacts/commonwealth.png";
+import warsawPact from "../assets/pacts/warsaw_pact.jpg";
+import mediterraneanPact from "../assets/pacts/mediterranean_pact.png";
+import westernUnion from "../assets/pacts/western_union.png";
+import laFrancophonie from "../assets/pacts/la_francophonie.png";
 
 export default function HomePage() {
   return (
@@ -9,7 +14,6 @@ export default function HomePage() {
       <Title title="Welcome to The Rocket's Red Glare Wiki!" links={[]} />
       <div className="mobile:float-right mobile:ml-4 mb-2 w-full mobile:w-auto">
         <ImageBox src={logo} caption="The official Rocket's Red Glare mod logo, as of 2026." size={500} />
-        <ImageBox src={logoClear} caption="The official Rocket's Red Glare mod logo (transparent), as of 2026." size={500} />
       </div>
       <div className="mb-3">
         <p className="text-[16px] text-black leading-[1.7]">
@@ -21,11 +25,84 @@ export default function HomePage() {
           <br /><br />
           This is not a gameplay guide. The vast majority of this wiki is written from an in-universe perspective,
           treating the mod's alternate history as fact. If you are looking for information on nations, historical
-          figures, or the events that led to the world of <b>Rocket's Red Glare</b>, you are in the right place.
-          For in-game mechanics, ideologies, technologies, and events, see the <b>Compendium</b>.
+          figures, or the events that led to the world of Rocket's Red Glare, you are in the right place.
+          For in-game mechanics, ideologies, technologies, and events, see the Compendium.
         </p>
       </div>
 
+      <Title title="Getting started" links={[]} size={18} />
+      <div className="mb-3">
+        <p className="text-[16px] text-black leading-[1.7]">
+          This wiki is currently maintained exclusively by the developers of Rocket's Red Glare and is not open
+          for public editing at this time. If you have a suggestion, a correction, or would like to contribute
+          information, we encourage you to reach out to us directly. You can contact the team via{" "}
+          <a href="#" className="text-primary hover:underline">Patreon</a>,
+          or through our{" "}
+          <a href="#" className="text-primary hover:underline">Contact</a>{" "}
+          and{" "}
+          <a href="#" className="text-primary hover:underline">Support us</a>{" "}
+          pages, where you will find all the relevant information on how to get in touch.
+          <br /><br />
+          We appreciate all feedback and ideas from the community. The wiki can only improve with input from players,
+          and while direct editing is not available, no suggestion goes unnoticed. Assume that everyone involved in
+          the project is working toward making it better — we certainly are.
+        </p>
+      </div>
+      <Title title="The world of RRG" links={[]} size={18} />
+      <div className="mb-3">
+        <p className="text-[16px] text-black leading-[1.7]">
+          The world of Rocket's Red Glare is shaped by a web of competing powers, ideological blocs, and
+          fragile alliances. Below you will find a list of the major pacts and coalitions that define the geopolitical
+          landscape, as well as a full list of playable nations and their place in this alternate world. If you are
+          new to the mod and unsure where to begin, feel free to start there.
+          <br /><br />
+          Optionally, you can follow the{" "}
+          <a href="#" className="text-primary hover:underline">complete timeline</a>
+          {" "}— a chronological overview of the key events that shaped the world from 1944 to 2000,
+          from the final years of the Second World War to the state of the world at the mod's start date.<br/><br/>
+        </p>
+      </div>
+      <div className="grid grid-cols-2 nav3:grid-cols-4 gap-3 mt-4">
+        {[
+          { src: warsawPact, label: "Warsaw Pact", items: ["Soviet Union", "Germany", "Czechoslovakia", "Hungary", "Romania", "Bulgaria", "Yugoslavia", "Turkey", "Iran", "Iraq", "Syria", "Afghanistan", "Republic of Mahabad", "Austria", "Macedonia"] },
+          { src: mediterraneanPact, label: "Mediterranean Pact", items: ["Italy", "People's Republic of Greece", "Egypt", "Algeria", "Somalia", "Croatia", "Albania", "Portugal", "Slovenia", "Free Territory of Trieste", "San Marino"] },
+          { src: westernUnion, label: "Western Union", items: ["Netherlands", "Sweden", "Denmark", "Norway", "Spain", "Flanders", "Luxembourg", "Iceland"] },
+          { src: commonwealth, label: "Commonwealth", items: ["United Kingdom", "Canada", "Australia", "New Zealand", "Malayan Union", "Republic of Newfoundland", "West Indies Federation", "Rhodesia", "Northern Rhodesia", "Territory of Venda", "Fiji", "New England", "Tuvalu", "Niue", "Cook Islands"] },
+        ].map(({ src, label, items }) => (
+          <div key={label} className="flex flex-col items-center">
+            <ImageBox src={src} caption={`<a href="#" class="text-primary hover:underline">${label}</a>`} boxStyle={false} size={300} />
+            <ul className="list-none text-[14px] mt-1 w-full text-center">
+              {items.map(item => (
+                <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-2 nav3:grid-cols-4 gap-3 mt-3">
+        <div className="flex flex-col items-center">
+          <ImageBox src={laFrancophonie} caption='<a href="#" class="text-primary hover:underline">La Francophonie</a>' boxStyle={false} size={300} />
+          <ul className="list-none text-[14px] mt-1 w-full text-center">
+            {["France", "Quebec", "Mali Federation", "Mauritania", "Upper Volta", "Guinea-Cayenne", "Wallonia", "Saarland", "Guadeloupe", "French Polynesia", "New Caledonia", "St Pierre and Miquelon", "Wallis and Futuna"].map(item => (
+              <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
+            ))}
+          </ul>
+        </div>
+        {[
+          { label: "Americas", items: ["United States", "United Socialist States of America", "Cuba", "United Mexican States", "Bolivia", "Gran Chaco", "New Africa", "California", "Texas", "Free City of St. Louis", "Free Territory", "Idaho", "Guatemala"] },
+          { label: "Africa", items: ["DR Congo", "Sudan", "Ethiopia", "South Africa", "Zaire", "Tanzania", "Nigeria", "Libya", "Katanga", "Benin", "Lesotho", "Free City of Pretoria"] },
+          { label: "Asia", items: ["China", "India", "Vietnam", "Indonesia", "People's Republic of Japan", "State of Japan", "Korea", "Mongolia", "South Yemen", "Kashmir", "North Kalimantan", "Hokkaido", "Ryukyu", "Jewish State of Tasmania"] },
+        ].map(({ label, items }) => (
+          <div key={label} className="flex flex-col items-center">
+            <a href="#" className="text-primary hover:underline text-[16px]">{label}</a>
+            <ul className="list-none text-[14px] mt-1 w-full text-center">
+              {items.map(item => (
+                <li key={item}><a href="#" className="text-primary hover:underline">{item}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

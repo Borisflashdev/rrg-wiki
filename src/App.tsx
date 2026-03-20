@@ -15,7 +15,7 @@ export default function RedDawnWiki() {
         </div>
         <div className="flex flex-col flex-1 min-w-0">
           <Header />
-          <main className="flex-1 bg-white px-6 pt-[40px] pb-4">
+          <main className="flex-1 bg-white px-6 pb-6">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="*" element={<NotFound />} />

@@ -13,11 +13,11 @@ interface TitleProps {
 
 export default function Title({ title, links = [], size = 22 }: TitleProps) {
   return (
-    <div className="mb-4">
+    <div className="mt-[30px] mb-4">
       <h1 style={{ fontSize: size }} className="font-bold text-black font-mono">
         {title}
       </h1>
-      <div className="h-[1px] bg-[#c8ccd1] my-1" />
+      <div className="overflow-hidden my-1"><div className="h-[1px] bg-[#c8ccd1]" /></div>
       {links.length > 0 && (
         <div className="text-[13px] text-[#54595d]">
           Main article:{" "}
