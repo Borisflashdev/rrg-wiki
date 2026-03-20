@@ -1,5 +1,4 @@
 import Title from "../components/Title";
-import { Link } from "react-router-dom";
 import ImageBox from "../components/ImageBox";
 import logo from "../assets/logo_white_bg.png";
 import map from "../assets/map_trans.png";
