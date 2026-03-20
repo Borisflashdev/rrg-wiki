@@ -1,87 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #b50c17;
-}
-
-@layer base {
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: monospace !important;
-  }
+  --color-primary: #cc0000;
+  --color-secondary: #e03030;
+  --breakpoint-mobile: 850px;
+  --breakpoint-nav3: 900px;
+  --breakpoint-nav4: 970px;
+  --breakpoint-nav5: 1100px;
 }
 
 html, body, #root {
   width: 100%;
   min-height: 100vh;
-}
-
-::selection {
-  background: #8B0000;
-  color: #ffffff;
-}
-
-@keyframes marquee {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-200%); }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@media (max-width: 600px) {
-  .rdp-layout,
-  .rdp-layout tbody,
-  .rdp-layout tr {
-    display: block !important;
-  }
-  .rdp-sidebar {
-    display: block !important;
-    width: 100% !important;
-  }
-  .rdp-content {
-    display: block !important;
-    width: 100% !important;
-  }
-  .rdp-infobox {
-    float: none !important;
-    width: 100% !important;
-    margin: 0 0 12px 0 !important;
-  }
-  .rdp-featured-td {
-    display: block !important;
-    width: 100% !important;
-  }
-}
-
-.wiki-body {
-  width: 100%;
-  background-color: #c0c0c0;
-  background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23b8b8b8' opacity='0.4'/%3E%3C/svg%3E");
-}
-
-.wiki-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 8px;
-}
-
-.win95-outset {
-  border: 2px outset #d4d0c8;
-  background-color: #d4d0c8;
-}
-
-.win95-inset {
-  border: 2px inset #d4d0c8;
-}
-
-.wiki-hr {
-  border: none;
-  border-top: 1px solid #808080;
-  border-bottom: 1px solid #ffffff;
-  margin: 8px 0;
+  font-family: monospace;
 }

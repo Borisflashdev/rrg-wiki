@@ -3,32 +3,27 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/Home";
-import NotFoundPage from "./pages/NotFound";
-
-// ─── MAIN ───
+import NotFound from "./pages/NotFound";
+import { LightboxProvider } from "./context/LightboxContext";
 
 export default function RedDawnWiki() {
   return (
-    <div className="wiki-body font-mono text-[11px] text-black min-h-screen">
-      <div className="wiki-container">
-        <Header />
-        <table className="rdp-layout w-full mt-[6px]" cellPadding={0} cellSpacing={12}>
-          <tbody>
-            <tr>
-              <Sidebar />
-              <td className="rdp-content align-top">
-                <div className="win95-inset px-4 py-3 bg-white min-h-[400px]">
-                  <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="*" element={<NotFoundPage />} />
-                  </Routes>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <Footer />
+    <LightboxProvider>
+      <div className="min-h-screen flex bg-[#f8f9fa] text-[14px] text-[#202122]">
+        <div className="hidden mobile:block">
+          <Sidebar />
+        </div>
+        <div className="flex flex-col flex-1 min-w-0">
+          <Header />
+          <main className="flex-1 bg-white px-6 pt-[40px] pb-4">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </div>
-    </div>
+    </LightboxProvider>
   );
 }

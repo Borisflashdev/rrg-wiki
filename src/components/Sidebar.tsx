@@ -1,9 +1,12 @@
+import { useNavigate, useLocation } from "react-router-dom";
+import logo from "../assets/logo.png";
+
 const NAV_SECTIONS = [
   {
     title: "Nations",
     items: [
-      { label: "Union of Soviet Socialist Republics", key: "ussr" },
-      { label: "United States", key: "usa_collapse" },
+      { label: "Union of Soviet Socialist Republics", key: "nations/ussr" },
+      { label: "United States", key: "nations/usa_collapse" },
       { label: "China", key: null },
       { label: "All nations", key: null },
     ],
@@ -37,75 +40,66 @@ const NAV_SECTIONS = [
       { label: "In-game events", key: null },
     ],
   },
+  {
+    title: "Useful links",
+    items: [
+      { label: "Steam", key: null },
+      { label: "Patreon", key: null },
+      { label: "GitHub (Mod)", key: null },
+      { label: "GitHub (Wiki)", key: null },
+    ],
+  },
 ];
-
-const TOOLS_ITEMS = [
-  { label: "Steam", key: null },
-  { label: "Patreon", key: null },
-  { label: "GitHub (Mod)", key: null },
-  { label: "GitHub (Wiki)", key: null },
-];
-
-import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentPath = location.pathname;
+
   return (
-    <td className="rdp-sidebar w-[180px] align-top p-0">
-      <div className="win95-inset p-0">
-        <div className="bg-gradient-to-b from-[#8B0000] to-[#6B0000] text-white font-bold text-[12px] px-2 py-1 text-center">
-          TODAY'S DATE
-        </div>
-        <div className="px-[6px] py-2 bg-[#f0f0e8] text-center font-mono">
-          <div className="text-[13px] font-bold text-[#8B0000]">1 January 2000</div>
+    <aside className="relative w-[220px] min-w-[220px] bg-[#f8f9fa] pl-[50px] pr-[10px] py-[12px] font-sans text-[14px]">
+      <div className="absolute top-0 right-0 w-[1px] h-full bg-[linear-gradient(to_bottom,transparent_0px,#c8ccd1_60px,#c8ccd1_calc(100%_-_58.25px),transparent_100%)]" />
+      <div className="absolute top-0 right-0 w-[1px] h-full bg-[linear-gradient(to_bottom,transparent_0px,#c8ccd1_60px,#c8ccd1_calc(100%_-_58.25px),transparent_100%)]" />
+      <div className="flex flex-col items-center mb-4 cursor-pointer " onClick={() => navigate("/")}>
+        <img src={logo} alt="Rocket's Red Glare logo" className="w-[110%] -ml-[5%] object-contain" />
+        <div className="font-mono text-center leading-tight mt-2">
+          <div className="text-[16px] font-bold text-black">Rocket's Red Glare</div>
+          <div className="text-[10px] text-[#54595d]">The Official Encyclopedia</div>
         </div>
       </div>
-
-      <div className="win95-inset p-0 mt-[6px]">
-        <div className="bg-gradient-to-b from-[#8B0000] to-[#6B0000] text-white font-bold text-[12px] px-2 py-1 text-center">
-          NAVIGATION
-        </div>
-        <div className="px-2 py-[6px] bg-[#f0f0e8]">
-          {NAV_SECTIONS.map(section => (
-            <div key={section.title} className="mb-2">
-              <div className="text-[11px] font-bold text-[#800000] font-mono mb-[3px] border-b border-dashed border-[#808080] pb-[2px]">
-                ► {section.title}
-              </div>
-              {section.items.map(item => (
-                <div key={item.label} className="pl-3 mb-[1px]">
-                  <span
-                    onClick={() => item.key && navigate(`/${item.key}`)}
-                    className={[
-                      "text-[12px]",
-                      item.key && currentPath === `/${item.key}` ? "text-[#800000] underline cursor-pointer font-bold" : "text-[#CC0000] underline",
-                      item.key ? "cursor-pointer opacity-100" : "cursor-default opacity-50",
-                    ].join(" ")}
-                  >
-                    {item.key && currentPath === `/${item.key}` ? "» " : ""}{item.label}
-                  </span>
-                </div>
-              ))}
+      <div className="h-[1px] bg-gradient-to-r from-transparent via-[#c8ccd1] to-transparent mx-2" />
+      {NAV_SECTIONS.map((section, i) => (
+        <div key={i} className="mb-[12px]">
+          {section.title && (
+            <div className="text-[#54595d] font-normal text-[14px] py-1 mb-[2px]">
+              {section.title}
+              <div className="mt-1 h-[1px] bg-gradient-to-r from-transparent via-[#c8ccd1] to-transparent mx-2" />
             </div>
-          ))}
+          )}
+          <ul className="list-none p-0">
+            {section.items.map(item => {
+              const isActive = item.key && (
+                item.key === "/" ? location.pathname === "/" : location.pathname === `/${item.key}`
+              );
+              return (
+                <li key={item.label} className="py-[2px]">
+                  {item.key ? (
+                    <span
+                      onClick={() => navigate(item.key === "/" ? "/" : `/${item.key}`)}
+                      className={`text-[14px] cursor-pointer hover:underline ${isActive ? "text-[#202122] font-bold" : "text-primary"}`}
+                    >
+                      {item.label}
+                    </span>
+                  ) : (
+                    <span className="text-primary text-[14px] opacity-50 cursor-default">
+                      {item.label}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </div>
-      </div>
-
-      <div className="win95-inset p-0 mt-[6px]">
-        <div className="bg-gradient-to-b from-[#8B0000] to-[#6B0000] text-white font-bold text-[12px] px-2 py-1 text-center">
-          USEFUL LINKS
-        </div>
-        <div className="px-2 py-[6px] bg-[#f0f0e8]">
-          {TOOLS_ITEMS.map(item => (
-            <div key={item.label} className="pl-3 mb-[1px]">
-              <span className="text-[#CC0000] underline text-[12px] opacity-50 cursor-default">
-                {item.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </td>
+      ))}
+    </aside>
   );
 }
